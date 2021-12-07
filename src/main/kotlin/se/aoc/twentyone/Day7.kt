@@ -16,24 +16,22 @@ class Day7 {
 
 
     fun part1(list: List<Int>): Number {
-        var min = list.minOrNull()?:0
-        var max = list.maxOrNull()?:0
-        var result = mutableListOf<Pair<Int, Int>>()
+        val min = list.minOrNull()?:0
+        val max = list.maxOrNull()?:0
+        val result = mutableListOf<Pair<Int, Int>>()
 
         for(i in min..max){
             val sum = list.sumOf {  l -> (l - i).absoluteValue }
             result.add(i to sum)
         }
-        return result.minByOrNull { (key, value) -> value }!!.second
-
-        return list.map { it to list.sumOf { l -> (l - it).absoluteValue } }.minByOrNull { (key, value) -> value }!!.second
+        return result.minByOrNull { (_, value) -> value }!!.second
     }
 
 
     fun part2(list: List<Int>): Number {
-        var min = list.minOrNull()?:0
-        var max = list.maxOrNull()?:0
-        var result = mutableListOf<Pair<Int, Int>>()
+        val min = list.minOrNull()?:0
+        val max = list.maxOrNull()?:0
+        val result = mutableListOf<Pair<Int, Int>>()
 
         for(i in min..max){
             val sum = list.sumOf {  l ->
@@ -41,7 +39,7 @@ class Day7 {
                 v * (v+1)/2 }
             result.add(i to sum)
         }
-        return result.minByOrNull { (key, value) -> value }!!.second
+        return result.minByOrNull { (_, value) -> value }!!.second
     }
 
 }
