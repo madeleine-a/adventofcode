@@ -7,7 +7,6 @@ class Day2 {
         val input = Day2::class.java.getResource("/twentyone/day2.txt").readText()
         val list = input.split("\r\n")
 
-
         println("Part 1")
         println(part1(list))
 
@@ -39,7 +38,7 @@ enum class CommandEnum {
     forward, down, up
 }
 
-class Command(val enum: CommandEnum, val value: Int){
+class Command(private val enum: CommandEnum, private val value: Int){
     fun getPoint(): Point {
         return when(enum){
             CommandEnum.forward -> Point(value, 0)

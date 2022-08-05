@@ -2,13 +2,15 @@ package se.aoc
 
 import kotlin.math.absoluteValue
 
-class Point(var x: Int, var y: Int) {
+class Point(var x: Int, var y: Int, var value: Int? = null) {
     fun offset(aX: Int, anY: Int) {
         this.x += (aX)
         this.y += (anY)
     }
 
     var depth = 0
+    var on = false
+
     fun aim(aX: Int, anY: Int) {
         this.x += (aX)
         this.y += (anY)
@@ -18,7 +20,7 @@ class Point(var x: Int, var y: Int) {
     }
 
     override fun toString(): String {
-        return "Point(x=$x, y=$y)"
+        return "Point(x=$x, y=$y) - V: $value"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -40,13 +42,14 @@ class Point(var x: Int, var y: Int) {
     }
 
     fun isHorizontalOrVertical(other: Point): Boolean {
-        return isHorizontal(other)||isVertical(other)
+        return isHorizontal(other) || isVertical(other)
     }
 
     private fun isHorizontal(other: Point): Boolean {
-        return  this.y == other.y
+        return this.y == other.y
     }
-    private fun isVertical(other: Point): Boolean{
+
+    private fun isVertical(other: Point): Boolean {
         return this.x == other.x
     }
 
@@ -57,34 +60,49 @@ class Point(var x: Int, var y: Int) {
 
     }
 
-    fun toRange(other: Point): List<Point>{
+    fun toRange(other: Point): List<Point> {
         val range = mutableListOf<Point>()
-        if(this.isVertical(other)){
+        if (this.isVertical(other)) {
             val y1 = if (this.y < other.y) this.y else other.y
             val y2 = if (this.y > other.y) this.y else other.y
             for (y in y1..y2) {
-                range.add(Point(x,y))
+                range.add(Point(x, y))
             }
-        }else if(this.isHorizontal(other)){
+        } else if (this.isHorizontal(other)) {
             val x1 = if (this.x < other.x) this.x else other.x
             val x2 = if (this.x > other.x) this.x else other.x
             for (x in x1..x2) {
-                range.add(Point(x,y))
+                range.add(Point(x, y))
             }
         } else if (this.isDiagonal(other)) {
             val pLow = if (this.x < other.x) this else other
             val pHigh = if (this.x > other.x) this else other
             val doSub = (pLow.y > pHigh.y)
-            for ((i, x) in (pLow.x .. pHigh.x).withIndex()) {
-                if(doSub){
+            for ((i, x) in (pLow.x..pHigh.x).withIndex()) {
+                if (doSub) {
                     range.add(Point(x, (pLow.y - i)))
-                }
-                else{
+                } else {
                     range.add(Point(x, (pLow.y + i).absoluteValue))
                 }
             }
         }
         return range
+    }
+
+    fun getAdjacentPoints(points: List<Point>): List<Point> {
+        val adjacentPoints = mutableListOf<Point>()
+        adjacentPoints.addAll(points.filter {
+            (
+                    it.x == this.x - 1 && it.y == this.y
+                            || it.x == this.x + 1 && it.y == this.y
+                            || it.x == this.x && it.y == this.y + 1
+                            || it.x == this.x && it.y == this.y - 1
+                            || it.x == this.x - 1 && it.y == this.y - 1
+                            || it.x == this.x + 1 && it.y == this.y + 1
+                            || it.x == this.x + 1 && it.y == this.y - 1
+                            || it.x == this.x -1 && it.y == this.y + 1)
+        })
+        return adjacentPoints
     }
 
 }
