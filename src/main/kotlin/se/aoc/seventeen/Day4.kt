@@ -21,7 +21,7 @@ class Day4 {
     }
 
     fun isValid(input: List<String>): Boolean {
-        return !input.groupingBy { it }.eachCount().any() { it.value > 1 }
+        return !input.groupingBy { it }.eachCount().any { it.value > 1 }
     }
 
     fun isValidAnagrams(input: List<String>): Boolean {
