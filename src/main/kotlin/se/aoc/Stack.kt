@@ -1,4 +1,4 @@
-package se.aoc.twentyone
+package se.aoc
 
 /**
  * Stack as type alias of Mutable List

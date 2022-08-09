@@ -1,8 +1,8 @@
 package se.aoc.twentyone.day9
 
-import se.aoc.twentyone.Stack
-import se.aoc.twentyone.push
-import se.aoc.twentyone.pushAll
+import se.aoc.Stack
+import se.aoc.push
+import se.aoc.pushAll
 
 class Day9 {
     lateinit var points: List<Point>
@@ -45,11 +45,11 @@ class Day9 {
             basin
         }
 
-        println(result.sortedByDescending {  it.size }.windowed(3, 1, false).first().map { it.size })
-        return result.asSequence().sortedByDescending {  it.size }.windowed(3, 1, false).first()
+        println(result.sortedByDescending { it.size }.windowed(3, 1, false).first().map { it.size })
+        return result.asSequence().sortedByDescending { it.size }.windowed(3, 1, false).first()
             .map { it.size }.reduce { acc, l ->
-            acc * l
-        }
+                acc * l
+            }
 
     }
 

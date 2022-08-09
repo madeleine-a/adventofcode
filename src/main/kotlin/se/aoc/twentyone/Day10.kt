@@ -1,5 +1,10 @@
 package se.aoc.twentyone
 
+import se.aoc.Stack
+import se.aoc.peek
+import se.aoc.pop
+import se.aoc.push
+
 class Day10 {
     val map = mapOf(')' to '(', ']' to '[', '>' to '<', '}' to '{')
     val map2 = mapOf('(' to ')', '[' to ']', '<' to '>', '{' to '}')
