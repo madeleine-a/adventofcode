@@ -11,7 +11,7 @@ fun main() {
 class Day1 {
 
     fun run() {
-        val input = Day1::class.java.getResource("/twentytwo/day1.txt").readText()
+        val input = Day1::class.java.getResource("/twentytwo/day1.txt")!!.readText()
         val list = createList(input)
         println("Part 1")
         println(part1(list))
@@ -25,14 +25,12 @@ class Day1 {
     }
 
     fun part1(input: List<List<Int>>): Number {
-        val calories = input.map { it.sum() }
-        return calories.maxOrNull()!!
+        return input.maxOf { it.sum() }
     }
 
 
     fun part2(input: List<List<Int>>): Number {
-        val calories = input.map { it.sum() }.sortedDescending().subList(0,3).sum()
-        return calories
+        return input.map { it.sum() }.sortedDescending().take(3).sum()
     }
 }
 
