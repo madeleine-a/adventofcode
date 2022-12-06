@@ -27,7 +27,7 @@ class Day6 {
     }
 
     private fun findDistinctChars(no: Int): Int {
-        input.forEachIndexed { i, c ->
+        input.forEachIndexed { i, _ ->
             if(i > (no-1)){
                 val subList = input.subList(i-no, i)
                 if( subList.groupingBy { it }.eachCount().maxOf { it.value } == 1) return i
