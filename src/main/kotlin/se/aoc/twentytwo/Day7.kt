@@ -10,12 +10,12 @@ fun main() {
 }
 
 class Day7 {
-    val root = Directory("/")
-    val commands: Stack<Command> = mutableListOf()
+    private val root = Directory("/")
+    private val commands: Stack<Command> = mutableListOf()
     fun run() {
         val input = Day7::class.java.getResource("/twentytwo/day7.txt").readText()
-        val list = createList(input)
-        println("Day 2")
+        createList(input)
+        println("Day 7")
         println("Part 1")
         println(part1())
 
