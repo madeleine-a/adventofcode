@@ -8,6 +8,13 @@ class Point(var x: Int, var y: Int, var value: Int? = null) {
         this.y += (anY)
     }
 
+    fun withOffset(aX: Int, anY: Int): Point {
+        val p = this.clone()
+        p.x += (aX)
+        p.y += (anY)
+        return p
+    }
+
     var depth = 0
     var on = false
 
@@ -17,6 +24,10 @@ class Point(var x: Int, var y: Int, var value: Int? = null) {
         if (aX > 0) {
             this.depth += aX * this.y
         }
+    }
+
+    fun clone(): Point {
+        return Point(this.x, this.y)
     }
 
     override fun toString(): String {
@@ -100,7 +111,7 @@ class Point(var x: Int, var y: Int, var value: Int? = null) {
                             || it.x == this.x - 1 && it.y == this.y - 1
                             || it.x == this.x + 1 && it.y == this.y + 1
                             || it.x == this.x + 1 && it.y == this.y - 1
-                            || it.x == this.x -1 && it.y == this.y + 1)
+                            || it.x == this.x - 1 && it.y == this.y + 1)
         })
         return adjacentPoints
     }
