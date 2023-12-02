@@ -1,12 +1,16 @@
 package se.aoc.twentythree
 
+import se.aoc.twentythree.Day2.Companion.bag
+
 fun main() {
     val d = Day2()
     d.run()
 }
 
 class Day2 {
-    private val bag = mapOf("red" to 12, "green" to 13, "blue" to 14)
+    companion object{
+        val bag = mapOf("red" to 12, "green" to 13, "blue" to 14)
+    }
 
     fun run() {
         val input = Day2::class.java.getResource("/twentythree/day2.txt").readText()
@@ -29,9 +33,8 @@ class Day2 {
         }
     }
 
-    private fun isPossible(g: Game): Boolean = g.sets.all{ s -> s.all { (key, value) -> bag[key]!! >= value }}
     fun part1(games: List<Game>): Number {
-        return games.filter { g -> (isPossible(g)) }.sumOf { it.id }
+        return games.filter { g -> (g.isPossible()) }.sumOf { it.id }
     }
 
     fun part2(games: List<Game>): Number {
@@ -47,5 +50,7 @@ data class Game(val id: Int, val sets: List<Map<String, Int>>){
         }
         return result.values.reduce { acc, i -> acc*i }
     }
+
+    fun isPossible() = sets.all{ s -> s.all { (key, value) -> bag[key]!! >= value }}
 }
 
