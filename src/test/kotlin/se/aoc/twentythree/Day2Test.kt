@@ -1,0 +1,22 @@
+package se.aoc.twentythree
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+
+internal class Day2Test {
+    val day = Day2()
+    val input = Day2::class.java.getResource("/twentythree/day2test.txt").readText()
+
+    @Test
+    fun part1() {
+        val list = day.createGames(input)
+        assertEquals(8, day.part1(list))
+    }
+
+    @Test
+    fun part2() {
+        val list = day.createGames(input)
+        assertEquals(2286, day.part2(list))
+    }
+}
+

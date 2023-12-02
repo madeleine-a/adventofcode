@@ -14,7 +14,7 @@ class Day1 {
     )
 
     fun run() {
-        val input = Day12::class.java.getResource("/twentythree/day1.txt").readText()
+        val input = Day1::class.java.getResource("/twentythree/day1.txt").readText()
         val list = createList(input)
         println("Part 1")
         println(part1(list)) // Expeced: 54331
