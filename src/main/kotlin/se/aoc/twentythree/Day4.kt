@@ -1,5 +1,6 @@
 package se.aoc.twentythree
 
+import splitStrOfNumbersToSet
 
 
 fun main() {
@@ -19,21 +20,21 @@ class Day4 {
     }
 
     fun createList(str: String): Map<Card, Set<Int>> {
-        val list = str.lines().map { s -> s.split("|") }
-            .map { l ->
-                val c = l.first().split(":")
-                val numbers = l.last().split(" ").mapNotNull { if(it.isNumber()) it.toInt() else null }.toSet()
-                val card = Card(c.first().replace("Card", "").trim().toInt(),
-                    c.last().split(" ").mapNotNull { if(it.isNumber()) it.toInt() else null }.toSet())
-                card to numbers
-            }.toMap()
+        val list = str.lines().map { s -> s.split("|") }.associate { l ->
+            val c = l.first().split(":")
+            val numbers = l.last().splitStrOfNumbersToSet()
+            val card = Card(
+                c.first().replace("Card", "").trim().toInt(),
+                c.last().splitStrOfNumbersToSet()
+            )
+            card to numbers
+        }
         return list
     }
 
     fun part1(input: Map<Card, Set<Int>>): Number {
         return input.map { (card, numbers) ->
              numbers.filter {card.numbers.contains(it) }.foldIndexed(0) { index, acc, _ ->  if(index==0)acc+1 else acc*2}
-
         }.sum()
     }
 
@@ -47,5 +48,5 @@ class Day4 {
 }
 
 data class Card (val id: Int, val numbers: Set<Int>, var wonCards: List<Card>? = null){
-    fun sumOfCards():Int = 1.plus(wonCards?.map { it.sumOfCards() }?.sum()?:0)
+    fun sumOfCards():Int = 1.plus(wonCards?.sumOf { it.sumOfCards() } ?:0)
 }
