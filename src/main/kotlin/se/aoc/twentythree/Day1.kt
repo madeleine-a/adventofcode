@@ -1,6 +1,5 @@
 package se.aoc.twentythree
 
-import se.aoc.twentytwo.Day12
 
 fun main() {
     val d = Day1()
