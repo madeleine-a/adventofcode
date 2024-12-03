@@ -9,13 +9,13 @@ internal class Day2Test {
 
     @Test
     fun part1() {
-        val list = day.createList(input)
+        val list = day.createSequence(input)
         assertEquals(2, day.part1(list))
     }
 
     @Test
     fun part2() {
-        val list = day.createList(input)
+        val list = day.createSequence(input)
         assertEquals(4, day.part2(list))
     }
 }
